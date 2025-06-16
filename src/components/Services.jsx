@@ -8,7 +8,7 @@ const Services = () => {
       title: "Custom Artwork",
       description:
         "Personalized resin art pieces tailored to your vision, color preferences, and space requirements.",
-      price: "Starting at ₹200",
+      price: "Starting at Low price",
       features: [
         "Custom size options",
         "Color consultation",
@@ -21,7 +21,7 @@ const Services = () => {
       title: "Workshops",
       description:
         "Learn the art of resin pouring in our hands-on workshops suitable for all skill levels.",
-      price: "Starting at ₹500",
+      // price: "Starting at Low price",
       features: [
         "All materials included",
         "Small group classes",
@@ -34,7 +34,7 @@ const Services = () => {
       title: "Interior Design",
       description:
         "Complete interior art solutions for homes, offices, and commercial spaces.",
-      price: "Starting at ₹2000",
+      price: "Starting at Low price",
       features: [
         "Space consultation",
         "Multiple pieces",
@@ -47,7 +47,7 @@ const Services = () => {
       title: "Gift Commissions",
       description:
         "Perfect gifts for special occasions with personalized touches and elegant packaging.",
-      price: "Starting at ₹100",
+      price: "Starting at Low price",
       features: [
         "Gift wrapping",
         "Personal message",
@@ -88,9 +88,9 @@ const Services = () => {
                     <h3 className="text-2xl font-bold text-gray-800">
                       {service.title}
                     </h3>
-                    <p className="text-purple-600 font-semibold">
+                    {/* <p className="text-purple-600 font-semibold">
                       {service.price}
-                    </p>
+                    </p> */}
                   </div>
                 </div>
 
