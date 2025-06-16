@@ -1,5 +1,6 @@
 import React from "react";
-import { Palette, Heart } from "lucide-react";
+import { Heart, Icon } from "lucide-react";
+import icon from "../assets/file.ico";
 
 const Footer = () => {
   return (
@@ -9,8 +10,9 @@ const Footer = () => {
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <Palette className="w-8 h-8 text-purple-400" />
-              <span className="text-2xl font-bold">ResinCraft</span>
+              {/* <Palette className="w-8 h-8 text-purple-400" /> */}
+              <img className="w-10 h-10 rounded-full" src={icon} alt="icon" />
+              <span className="text-2xl font-bold">DryPoint-ResinArt</span>
             </div>
             <p className="text-gray-300 mb-4 max-w-md">
               Creating stunning resin art pieces that capture the beauty of

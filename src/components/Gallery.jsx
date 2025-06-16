@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Eye, Heart, ExternalLink } from "lucide-react";
+import { Heart } from "lucide-react";
 import FlowerPre1 from "../assets/FlowerPre1.png";
 import FlowerPre2 from "../assets/FlowerPre2.png";
 import FlowerPre3 from "../assets/FlowerPre3.png";
@@ -25,15 +25,16 @@ import Tray4 from "../assets/Tray4.png";
 
 const Gallery = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [modalImage, setModalImage] = useState(null);
 
   const categories = [
-    "all",
+    "All",
     "Miniature",
     "Wooden Frames",
     "Clock",
     "Key Chains",
     "Preservation",
-    "Resin Tray's",
+    "Resin Trays",
   ];
 
   const artPieces = [
@@ -42,7 +43,6 @@ const Gallery = () => {
       title: "Flower Preservation",
       category: "Preservation",
       image: FlowerPre1,
-      // price: "₹499",
       likes: 124,
     },
     {
@@ -50,16 +50,13 @@ const Gallery = () => {
       title: "Wooden varmala preservation",
       category: "Wooden Frames",
       image: Wood3,
-      // price: "₹1299",
       likes: 89,
     },
-
     {
       id: 3,
       title: "Customized Clock",
       category: "Clock",
       image: ClockBlack,
-      // price: "₹499",
       likes: 70,
     },
     {
@@ -67,7 +64,6 @@ const Gallery = () => {
       title: "Customized Clock",
       category: "Clock",
       image: Clock2,
-      // price: "₹599",
       likes: 123,
     },
     {
@@ -75,7 +71,6 @@ const Gallery = () => {
       title: "Wooden varmala preservation",
       category: "Wooden Frames",
       image: Wood1,
-      // price: "₹1100",
       likes: 134,
     },
     {
@@ -83,7 +78,6 @@ const Gallery = () => {
       title: "Custom KeyChains",
       category: "Key Chains",
       image: KeyChain3,
-      // price: "₹69",
       likes: 175,
     },
     {
@@ -91,7 +85,6 @@ const Gallery = () => {
       title: "Custom KeyChains",
       category: "Key Chains",
       image: KeyChain2,
-      // price: "₹49",
       likes: 162,
     },
     {
@@ -99,7 +92,6 @@ const Gallery = () => {
       title: "Custom KeyChains",
       category: "Key Chains",
       image: KeyChain1,
-      // price: "₹49",
       likes: 125,
     },
     {
@@ -107,7 +99,6 @@ const Gallery = () => {
       title: "Wooden varmala preservation",
       category: "Wooden Frames",
       image: Wood4,
-      // price: "₹1320",
       likes: 89,
     },
     {
@@ -115,7 +106,6 @@ const Gallery = () => {
       title: "Wooden varmala preservation",
       category: "Wooden Frames",
       image: Wood2,
-      // price: "₹1399",
       likes: 89,
     },
     {
@@ -123,7 +113,6 @@ const Gallery = () => {
       title: "Miniature",
       category: "Miniature",
       image: Miniature1,
-      // price: "₹1499",
       likes: 89,
     },
     {
@@ -131,7 +120,6 @@ const Gallery = () => {
       title: "Miniature",
       category: "Miniature",
       image: Miniature2,
-      // price: "₹1599",
       likes: 89,
     },
     {
@@ -139,7 +127,6 @@ const Gallery = () => {
       title: "Miniature",
       category: "Miniature",
       image: Miniature3,
-      // price: "₹1699",
       likes: 189,
     },
     {
@@ -147,7 +134,6 @@ const Gallery = () => {
       title: "Miniature",
       category: "Miniature",
       image: Miniature4,
-      // price: "₹1499",
       likes: 146,
     },
     {
@@ -155,7 +141,6 @@ const Gallery = () => {
       title: "Miniature",
       category: "Miniature",
       image: Miniature5,
-      // price: "₹1499",
       likes: 349,
     },
     {
@@ -163,7 +148,6 @@ const Gallery = () => {
       title: "Miniature",
       category: "Miniature",
       image: Miniature6,
-      // price: "₹1399",
       likes: 145,
     },
     {
@@ -171,7 +155,6 @@ const Gallery = () => {
       title: "Flower Preservation",
       category: "Preservation",
       image: FlowerPre2,
-      // price: "₹499",
       likes: 124,
     },
     {
@@ -179,50 +162,45 @@ const Gallery = () => {
       title: "Flower Preservation",
       category: "Preservation",
       image: FlowerPre3,
-      // price: "₹499",
-      likes: 114,
+      likes: 124,
     },
     {
       id: 19,
-      title: " Resin Tray's",
-      category: "Resin Tray's",
+      title: "Resin Tray",
+      category: "Resin Trays",
       image: Tray1,
-      // price: "₹499",
-      likes: 89,
+      likes: 124,
     },
     {
       id: 20,
-      title: " Resin Tray's",
-      category: "Resin Tray's",
+      title: "Resin Tray",
+      category: "Resin Trays",
       image: Tray2,
-      // price: "₹499",
-      likes: 144,
+      likes: 124,
     },
     {
       id: 21,
-      title: " Resin Tray's",
-      category: "Resin Tray's",
+      title: "Resin Tray",
+      category: "Resin Trays",
       image: Tray3,
-      // price: "₹499",
-      likes: 211,
+      likes: 124,
     },
     {
       id: 22,
-      title: " Resin Tray's",
-      category: "Resin Tray's",
+      title: "Resin Tray",
+      category: "Resin Trays",
       image: Tray4,
-      // price: "₹499",
-      likes: 34,
+      likes: 124,
     },
   ];
 
   const filteredPieces =
-    selectedCategory === "all"
+    selectedCategory.toLowerCase() === "all"
       ? artPieces
       : artPieces.filter((piece) => piece.category === selectedCategory);
 
   return (
-    <section id="gallery" className="py-20 bg-gray-50">
+    <section id="gallery" className="py-20 bg-gray-50 relative">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
@@ -230,7 +208,7 @@ const Gallery = () => {
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Explore our collection of unique resin art pieces, each one a
-            masterpiece of color and creativity
+            masterpiece of color and creativity.
           </p>
         </div>
 
@@ -246,7 +224,7 @@ const Gallery = () => {
                   : "bg-white text-gray-700 hover:bg-purple-100 shadow-md"
               }`}
             >
-              {category.charAt(0).toUpperCase() + category.slice(1)}
+              {category}
             </button>
           ))}
         </div>
@@ -258,45 +236,49 @@ const Gallery = () => {
               key={piece.id}
               className="group relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
             >
-              <div className="relative overflow-hidden">
+              <div className="relative overflow-hidden cursor-pointer">
                 <img
                   src={piece.image}
                   alt={piece.title}
                   className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
+                  onClick={() => setModalImage(piece.image)}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-                {/* Overlay actions */}
-                {/* <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="flex space-x-4">
-                    <button className="bg-white/20 backdrop-blur-sm text-white p-3 rounded-full hover:bg-white/30 transition-colors">
-                      <Eye className="w-5 h-5" />
-                    </button>
-                    <button className="bg-white/20 backdrop-blur-sm text-white p-3 rounded-full hover:bg-white/30 transition-colors">
-                      <ExternalLink className="w-5 h-5" />
-                    </button>
-                  </div>
-                </div> */}
               </div>
 
               <div className="p-6">
                 <h3 className="text-xl font-semibold text-gray-800 mb-2">
                   {piece.title}
                 </h3>
-                <div className="flex items-center">
-                  {/* <span className="text-2xl font-bold text-purple-600">
-                    {piece.price}
-                  </span> */}
-                  <div className="flex items-center text-gray-500">
-                    <Heart className="w-4 h-4 mr-1" />
-                    <span>{piece.likes}</span>
-                  </div>
+                <div className="flex items-center text-gray-500">
+                  <Heart className="w-4 h-4 mr-1" />
+                  <span>{piece.likes}</span>
                 </div>
               </div>
             </div>
           ))}
         </div>
       </div>
+
+      {/* Modal */}
+      {modalImage && (
+        <div
+          className="fixed inset-0 z-50 bg-black bg-opacity-80 flex items-center justify-center"
+          onClick={() => setModalImage(null)}
+        >
+          <img
+            src={modalImage}
+            alt="Large view"
+            className="max-w-3xl max-h-[80vh] object-contain border-4 border-white rounded-xl shadow-xl"
+            onClick={(e) => e.stopPropagation()}
+          />
+          <button
+            onClick={() => setModalImage(null)}
+            className="absolute top-6 right-6 text-white text-3xl font-bold"
+          >
+            &times;
+          </button>
+        </div>
+      )}
     </section>
   );
 };
