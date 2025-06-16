@@ -18,26 +18,24 @@ import Miniature3 from "../assets/Miniature3.png";
 import Miniature4 from "../assets/Miniature4.png";
 import Miniature5 from "../assets/Miniature5.png";
 import Miniature6 from "../assets/Miniature6.png";
+import Tray1 from "../assets/Tray1.png";
+import Tray2 from "../assets/Tray2.png";
+import Tray3 from "../assets/Tray3.png";
+import Tray4 from "../assets/Tray4.png";
 
 const Gallery = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
 
   const categories = [
-    "All",
+    "all",
     "Miniature",
     "Wooden Frames",
     "Clock",
     "Key Chains",
     "Preservation",
+    "Resin Tray's",
   ];
 
-  // const categories = [
-  //   "All",
-  //   "Flower Preservation",
-  //   "Resin Clock",
-  //   "Wodden Frames",
-  //   "Key Chains",
-  // ];
   const artPieces = [
     {
       id: 1,
@@ -182,12 +180,44 @@ const Gallery = () => {
       category: "Preservation",
       image: FlowerPre3,
       // price: "₹499",
-      likes: 124,
+      likes: 114,
+    },
+    {
+      id: 19,
+      title: " Resin Tray's",
+      category: "Resin Tray's",
+      image: Tray1,
+      // price: "₹499",
+      likes: 89,
+    },
+    {
+      id: 20,
+      title: " Resin Tray's",
+      category: "Resin Tray's",
+      image: Tray2,
+      // price: "₹499",
+      likes: 144,
+    },
+    {
+      id: 21,
+      title: " Resin Tray's",
+      category: "Resin Tray's",
+      image: Tray3,
+      // price: "₹499",
+      likes: 211,
+    },
+    {
+      id: 22,
+      title: " Resin Tray's",
+      category: "Resin Tray's",
+      image: Tray4,
+      // price: "₹499",
+      likes: 34,
     },
   ];
 
   const filteredPieces =
-    selectedCategory === "All"
+    selectedCategory === "all"
       ? artPieces
       : artPieces.filter((piece) => piece.category === selectedCategory);
 
