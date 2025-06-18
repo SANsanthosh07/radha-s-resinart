@@ -8,6 +8,7 @@ import {
   Facebook,
   Twitter,
 } from "lucide-react";
+import axios from "axios";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -17,17 +18,33 @@ const Contact = () => {
     message: "",
   });
 
+  const [status, setStatus] = useState("");
+
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData((prev) => ({
+      ...prev,
+      [e?.target?.name]: e?.target?.value,
+    }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission here
-    console.log("Form submitted:", formData);
+  const handleSubmit = async (e) => {
+    e?.preventDefault();
+    setStatus("Sending...");
+
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_SERVER_APP_URL}/api/v1/post-getTouch`,
+        formData
+      );
+
+      alert("Your message received successfully!");
+
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    } catch (error) {
+      alart("Failed to send. Please try again.");
+      console.error(error);
+    }
+    console.log(formData);
   };
 
   const contactInfo = [
@@ -50,7 +67,6 @@ const Contact = () => {
       link: "https://www.google.com/maps/@13.1162671,80.1432719,3a,75y,307.95h,103.82t/data=!3m7!1e1!3m5!1sUnOCvObHsqpVls0KLwkF9g!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-13.821789776566987%26panoid%3DUnOCvObHsqpVls0KLwkF9g%26yaw%3D307.95341313056133!7i13312!8i6656?authuser=0&entry=ttu&g_ep=EgoyMDI1MDYwOC4wIKXMDSoASAFQAw%3D%3D",
     },
   ];
-
   const socialLinks = [
     {
       icon: Instagram,
