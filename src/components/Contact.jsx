@@ -41,7 +41,7 @@ const Contact = () => {
 
       setFormData({ name: "", email: "", subject: "", message: "" });
     } catch (error) {
-      alart("Failed to send. Please try again.");
+      alert("Failed to send. Please try again.");
       console.error(error);
     }
     console.log(formData);
