@@ -12,7 +12,7 @@ const Gallery = () => {
   const [modalImage, setModalImage] = useState(null);
 
   const categories = [
-    "All",
+    "all",
     "Miniature",
     "Wooden Frames",
     "Clock",
@@ -54,7 +54,7 @@ const Gallery = () => {
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+              className={`hover:cursor-pointer px-6 py-3 rounded-full font-medium transition-all duration-300 ${
                 selectedCategory === category
                   ? "bg-purple-600 text-white shadow-lg"
                   : "bg-white text-gray-700 hover:bg-purple-100 shadow-md"
