@@ -1,27 +1,11 @@
 import React, { useState } from "react";
 import { Heart } from "lucide-react";
-import FlowerPre1 from "../assets/FlowerPre1.png";
-import FlowerPre2 from "../assets/FlowerPre2.png";
-import FlowerPre3 from "../assets/FlowerPre3.png";
-import ClockBlack from "../assets/ClockBlack.png";
-import Clock2 from "../assets/Clock2.png";
-import KeyChain1 from "../assets/KeyChain1.png";
-import KeyChain2 from "../assets/KeyChain2.png";
-import KeyChain3 from "../assets/KeyChain3.png";
-import Wood1 from "../assets/Wood1.png";
-import Wood2 from "../assets/Wood2.png";
-import Wood3 from "../assets/Wood3.png";
-import Wood4 from "../assets/Wood4.png";
-import Miniature1 from "../assets/Miniature1.png";
-import Miniature2 from "../assets/Miniature2.png";
-import Miniature3 from "../assets/Miniature3.png";
-import Miniature4 from "../assets/Miniature4.png";
-import Miniature5 from "../assets/Miniature5.png";
-import Miniature6 from "../assets/Miniature6.png";
-import Tray1 from "../assets/Tray1.png";
-import Tray2 from "../assets/Tray2.png";
-import Tray3 from "../assets/Tray3.png";
-import Tray4 from "../assets/Tray4.png";
+import galleryData from "../components/gallaryImages";
+
+const images = import.meta.glob("../assets/**/*.{png,jpg,jpeg}", {
+  eager: true,
+  import: "default",
+});
 
 const Gallery = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -35,164 +19,15 @@ const Gallery = () => {
     "Key Chains",
     "Preservation",
     "Resin Trays",
+    "New Born preservation",
+    "Resin Candle Holders",
   ];
 
-  const artPieces = [
-    {
-      id: 1,
-      title: "Flower Preservation",
-      category: "Preservation",
-      image: FlowerPre1,
-      likes: 124,
-    },
-    {
-      id: 2,
-      title: "Wooden varmala preservation",
-      category: "Wooden Frames",
-      image: Wood3,
-      likes: 89,
-    },
-    {
-      id: 3,
-      title: "Customized Clock",
-      category: "Clock",
-      image: ClockBlack,
-      likes: 70,
-    },
-    {
-      id: 4,
-      title: "Customized Clock",
-      category: "Clock",
-      image: Clock2,
-      likes: 123,
-    },
-    {
-      id: 5,
-      title: "Wooden varmala preservation",
-      category: "Wooden Frames",
-      image: Wood1,
-      likes: 134,
-    },
-    {
-      id: 6,
-      title: "Custom KeyChains",
-      category: "Key Chains",
-      image: KeyChain3,
-      likes: 175,
-    },
-    {
-      id: 7,
-      title: "Custom KeyChains",
-      category: "Key Chains",
-      image: KeyChain2,
-      likes: 162,
-    },
-    {
-      id: 8,
-      title: "Custom KeyChains",
-      category: "Key Chains",
-      image: KeyChain1,
-      likes: 125,
-    },
-    {
-      id: 9,
-      title: "Wooden varmala preservation",
-      category: "Wooden Frames",
-      image: Wood4,
-      likes: 89,
-    },
-    {
-      id: 10,
-      title: "Wooden varmala preservation",
-      category: "Wooden Frames",
-      image: Wood2,
-      likes: 89,
-    },
-    {
-      id: 11,
-      title: "Miniature",
-      category: "Miniature",
-      image: Miniature1,
-      likes: 89,
-    },
-    {
-      id: 12,
-      title: "Miniature",
-      category: "Miniature",
-      image: Miniature2,
-      likes: 89,
-    },
-    {
-      id: 13,
-      title: "Miniature",
-      category: "Miniature",
-      image: Miniature3,
-      likes: 189,
-    },
-    {
-      id: 14,
-      title: "Miniature",
-      category: "Miniature",
-      image: Miniature4,
-      likes: 146,
-    },
-    {
-      id: 15,
-      title: "Miniature",
-      category: "Miniature",
-      image: Miniature5,
-      likes: 349,
-    },
-    {
-      id: 16,
-      title: "Miniature",
-      category: "Miniature",
-      image: Miniature6,
-      likes: 145,
-    },
-    {
-      id: 17,
-      title: "Flower Preservation",
-      category: "Preservation",
-      image: FlowerPre2,
-      likes: 124,
-    },
-    {
-      id: 18,
-      title: "Flower Preservation",
-      category: "Preservation",
-      image: FlowerPre3,
-      likes: 124,
-    },
-    {
-      id: 19,
-      title: "Resin Tray",
-      category: "Resin Trays",
-      image: Tray1,
-      likes: 124,
-    },
-    {
-      id: 20,
-      title: "Resin Tray",
-      category: "Resin Trays",
-      image: Tray2,
-      likes: 124,
-    },
-    {
-      id: 21,
-      title: "Resin Tray",
-      category: "Resin Trays",
-      image: Tray3,
-      likes: 124,
-    },
-    {
-      id: 22,
-      title: "Resin Tray",
-      category: "Resin Trays",
-      image: Tray4,
-      likes: 124,
-    },
-  ];
+  // add full image src to each item
+  const artPieces = galleryData.map((piece) => ({
+    ...piece,
+    image: images[`../assets/${piece.image}`],
+  }));
 
   const filteredPieces =
     selectedCategory.toLowerCase() === "all"
@@ -202,17 +37,18 @@ const Gallery = () => {
   return (
     <section id="gallery" className="py-20 bg-gray-50 relative">
       <div className="container mx-auto px-4">
+        {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
             Art Gallery
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Explore our collection of unique resin art pieces, each one a
-            masterpiece of color and creativity.
+            masterpiece.
           </p>
         </div>
 
-        {/* Category Filter */}
+        {/* Category Buttons */}
         <div className="flex flex-wrap justify-center gap-4 mb-12">
           {categories.map((category) => (
             <button
@@ -259,7 +95,7 @@ const Gallery = () => {
         </div>
       </div>
 
-      {/* Modal */}
+      {/* Modal View */}
       {modalImage && (
         <div
           className="fixed inset-0 z-50 bg-black bg-opacity-80 flex items-center justify-center"
