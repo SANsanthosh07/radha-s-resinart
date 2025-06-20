@@ -44,7 +44,7 @@ const Contact = () => {
       alert("Failed to send. Please try again.");
       console.error(error);
     }
-    console.log(formData);
+   
   };
 
   const contactInfo = [

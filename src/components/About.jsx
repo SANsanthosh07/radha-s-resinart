@@ -6,7 +6,7 @@ const About = () => {
     { icon: Palette, number: "500+", label: "Artworks Created" },
     { icon: Users, number: "200+", label: "Happy Clients" },
     { icon: Award, number: "7", label: "Awards Won" },
-    { icon: Clock, number: "3", label: "Years Experience" },
+    { icon: Clock, number: "2.5", label: "Years Experience" },
   ];
 
   return (
