@@ -40,7 +40,7 @@ const Contact = () => {
         key,
         type: "success",
         content: "Message sent successfully!",
-        duration: 2,
+        duration: 3,
       });
 
       setFormData({ name: "", email: "", subject: "", message: "" });
