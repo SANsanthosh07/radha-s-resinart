@@ -1,14 +1,7 @@
 import React, { useState } from "react";
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Send,
-  Instagram,
-  Facebook,
-  Twitter,
-} from "lucide-react";
+import { Mail, Phone, MapPin, Send, Instagram, Facebook } from "lucide-react";
 import axios from "axios";
+import { message } from "antd";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -18,33 +11,48 @@ const Contact = () => {
     message: "",
   });
 
-  const [status, setStatus] = useState("");
+  const [messageApi, contextHolder] = message.useMessage();
+  const key = "sendMessage";
 
   const handleChange = (e) => {
     setFormData((prev) => ({
       ...prev,
-      [e?.target?.name]: e?.target?.value,
+      [e.target.name]: e.target.value,
     }));
   };
 
   const handleSubmit = async (e) => {
-    e?.preventDefault();
-    setStatus("Sending...");
+    e.preventDefault();
+
+    messageApi.open({
+      key,
+      type: "loading",
+      content: "Sending message...",
+    });
 
     try {
-      const response = await axios.post(
+      await axios.post(
         `${import.meta.env.VITE_SERVER_APP_URL}/api/v1/post-getTouch`,
         formData
       );
 
-      alert("Your message received successfully!");
+      messageApi.open({
+        key,
+        type: "success",
+        content: "Message sent successfully!",
+        duration: 2,
+      });
 
       setFormData({ name: "", email: "", subject: "", message: "" });
     } catch (error) {
-      alert("Failed to send. Please try again.");
+      messageApi.open({
+        key,
+        type: "error",
+        content: "Failed to send message. Please try again.",
+        duration: 3,
+      });
       console.error(error);
     }
-   
   };
 
   const contactInfo = [
@@ -78,7 +86,6 @@ const Contact = () => {
       href: "https://www.facebook.com/people/Drypoint-Resin-Art/pfbid02cEnhFFa1Yea1djEC4NQreJYpCQV4jS8ixMmbuqWUCadgkBHYF1CQSXvj4yyRkgzgl/",
       label: "Facebook",
     },
-    // { icon: Twitter, href: "#", label: "Twitter" },
   ];
 
   return (
@@ -87,6 +94,7 @@ const Contact = () => {
       className="py-20 bg-gradient-to-br from-purple-50 to-pink-50"
     >
       <div className="container mx-auto px-4">
+        {contextHolder}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
             Get In Touch
