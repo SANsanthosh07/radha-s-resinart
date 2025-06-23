@@ -24,6 +24,28 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const trimmedData = {
+      name: formData.name?.trim() || "",
+      email: formData.email?.trim() || "",
+      subject: formData.subject?.trim() || "",
+      message: formData.message?.trim() || "",
+    };
+
+    if (
+      !trimmedData.name ||
+      !trimmedData.email ||
+      !trimmedData.subject ||
+      !trimmedData.message
+    ) {
+      messageApi.open({
+        key,
+        type: "error",
+        content: "All fields are required and must not be empty.",
+        duration: 3,
+      });
+      return;
+    }
+
     messageApi.open({
       key,
       type: "loading",
@@ -33,14 +55,14 @@ const Contact = () => {
     try {
       await axios.post(
         `${import.meta.env.VITE_SERVER_APP_URL}/api/v1/post-getTouch`,
-        formData
+        trimmedData
       );
 
       messageApi.open({
         key,
         type: "success",
         content: "Message sent successfully!",
-        duration: 3,
+        duration: 4,
       });
 
       setFormData({ name: "", email: "", subject: "", message: "" });
@@ -49,7 +71,7 @@ const Contact = () => {
         key,
         type: "error",
         content: "Failed to send message. Please try again.",
-        duration: 3,
+        duration: 4,
       });
       console.error(error);
     }
