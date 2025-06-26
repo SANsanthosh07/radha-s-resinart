@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Heart } from "lucide-react";
+import { Heart, Eye } from "lucide-react"; // Eye icon for preview
 import galleryData from "../components/gallaryImages";
 
 const images = import.meta.glob("../assets/**/*.{png,jpg,jpeg}", {
@@ -8,7 +8,7 @@ const images = import.meta.glob("../assets/**/*.{png,jpg,jpeg}", {
 });
 
 const Gallery = () => {
-  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedCategory, setSelectedCategory] = useState("");
   const [modalImage, setModalImage] = useState(null);
 
   const categories = [
@@ -23,15 +23,16 @@ const Gallery = () => {
     "Resin Candle Holders",
   ];
 
-  // add full image src to each item
   const artPieces = galleryData.map((piece) => ({
     ...piece,
     image: images[`../assets/${piece.image}`],
   }));
 
   const filteredPieces =
-    selectedCategory.toLowerCase() === "all"
+    selectedCategory === "all"
       ? artPieces
+      : selectedCategory === ""
+      ? []
       : artPieces.filter((piece) => piece.category === selectedCategory);
 
   return (
@@ -53,7 +54,11 @@ const Gallery = () => {
           {categories.map((category) => (
             <button
               key={category}
-              onClick={() => setSelectedCategory(category)}
+              onClick={() =>
+                setSelectedCategory((prev) =>
+                  prev === category ? "" : category
+                )
+              }
               className={`hover:cursor-pointer px-6 py-3 rounded-full font-medium transition-all duration-300 ${
                 selectedCategory === category
                   ? "bg-purple-600 text-white shadow-lg"
@@ -66,33 +71,48 @@ const Gallery = () => {
         </div>
 
         {/* Gallery Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredPieces.map((piece) => (
-            <div
-              key={piece.id}
-              className="group relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
-            >
-              <div className="relative overflow-hidden cursor-pointer">
-                <img
-                  src={piece.image}
-                  alt={piece.title}
-                  className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
-                  onClick={() => setModalImage(piece.image)}
-                />
-              </div>
+        {filteredPieces.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredPieces.map((piece) => (
+              <div
+                key={piece.id}
+                className="group relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+              >
+                {/* Image + Preview Icon */}
+                <div className="relative overflow-hidden group cursor-pointer">
+                  <img
+                    src={piece.image}
+                    alt={piece.title}
+                    className="w-full aspect-[4/3] object-cover transition-transform duration-300 group-hover:scale-110"
+                    onClick={() => setModalImage(piece.image)}
+                  />
+                  <button
+                    onClick={() => setModalImage(piece.image)}
+                    className="absolute inset-0 flex items-center gap-2 justify-center font-bold   bg-gary-200 hover:bg-opacity-80 text-black animate-pulse"
+                  >
+                    <Eye className="w-6 h-6  " />
+                    <p className="text-black font-bold">Preview</p>
+                  </button>
+                </div>
 
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                  {piece.title}
-                </h3>
-                <div className="flex items-center text-gray-500">
-                  <Heart className="w-4 h-4 mr-1" />
-                  <span>{piece.likes}</span>
+                {/* Title + Likes */}
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                    {piece.title}
+                  </h3>
+                  <div className="flex items-center text-gray-500">
+                    <Heart className="w-4 h-4 mr-1" />
+                    <span>{piece.likes}</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <p className="text-center text-purple-400 font-semibold text-xl mt-12">
+            Click a category to view artworks.
+          </p>
+        )}
       </div>
 
       {/* Modal View */}
