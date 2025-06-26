@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Heart, Eye } from "lucide-react"; // Eye icon for preview
+import React, { useState, useEffect } from "react";
+import { Heart, Eye } from "lucide-react";
 import galleryData from "../components/gallaryImages";
 
 const images = import.meta.glob("../assets/**/*.{png,jpg,jpeg}", {
@@ -10,6 +10,8 @@ const images = import.meta.glob("../assets/**/*.{png,jpg,jpeg}", {
 const Gallery = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [modalImage, setModalImage] = useState(null);
+  const [likes, setLikes] = useState({});
+  const [animateId, setAnimateId] = useState(null);
 
   const categories = [
     "all",
@@ -22,6 +24,21 @@ const Gallery = () => {
     "New Born preservation",
     "Resin Candle Holders",
   ];
+
+  // Load likes from localStorage once
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem("likes")) || {};
+    setLikes(stored);
+  }, []);
+
+  // Handle like action
+  const handleLike = (id) => {
+    const updated = { ...likes, [id]: (likes[id] || 0) + 1 };
+    setLikes(updated);
+    localStorage.setItem("likes", JSON.stringify(updated));
+    setAnimateId(id);
+    setTimeout(() => setAnimateId(null), 400);
+  };
 
   const artPieces = galleryData.map((piece) => ({
     ...piece,
@@ -100,9 +117,18 @@ const Gallery = () => {
                   <h3 className="text-xl font-semibold text-gray-800 mb-2">
                     {piece.title}
                   </h3>
-                  <div className="flex items-center text-gray-500">
-                    <Heart className="w-4 h-4 mr-1" />
-                    <span>{piece.likes}</span>
+                  <div className="flex items-center text-gray-500 space-x-2">
+                    <button
+                      onClick={() => handleLike(piece.id)}
+                      className={`transition-transform duration-300 ${
+                        animateId === piece.id ? "scale-125 animate-ping" : ""
+                      }`}
+                    >
+                      <Heart className="w-5 h-5 text-red-500" />
+                    </button>
+                    <span className="font-medium">
+                      {likes[piece.id] ?? piece.likes}
+                    </span>
                   </div>
                 </div>
               </div>
