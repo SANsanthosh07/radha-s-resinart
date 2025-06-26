@@ -105,7 +105,7 @@ const Gallery = () => {
                   />
                   <button
                     onClick={() => setModalImage(piece.image)}
-                    className="absolute inset-0 flex items-center gap-2 justify-center font-bold   bg-gary-200 hover:bg-opacity-80 text-black animate-pulse"
+                    className="absolute inset-0 flex items-center gap-2 justify-center font-bold hover:bg-opacity-80 text-black animate-pulse"
                   >
                     <Eye className="w-6 h-6  " />
                     <p className="text-black font-bold">Preview</p>
