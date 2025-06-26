@@ -22,8 +22,8 @@ const About = () => {
                 className="rounded-2xl shadow-2xl"
               />
             </div>
-            <div className="absolute -top-8 -right-8 w-64 h-64 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full opacity-20 -z-10"></div>
-            <div className="absolute -bottom-8 -left-8 w-48 h-48 bg-gradient-to-br from-blue-400 to-teal-400 rounded-full opacity-20 -z-10"></div>
+            {/* <div className="absolute -top-8 -right-8 w-64 h-64 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full opacity-20 -z-10"></div> */}
+            {/* <div className="absolute -bottom-8 -left-8 w-48 h-48 bg-gradient-to-br from-blue-400 to-teal-400 rounded-full opacity-20 -z-10"></div> */}
           </div>
 
           {/* Content side */}
